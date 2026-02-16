@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: personalearn
+    jwt:
+      keycloak:
+        url: ${ISSUER_URI}
+        client-id: ${CLIENT_ID}
+        client-secret: ${CLIENT_SECRET}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI}
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+server:
+  port: 8000
+
+jwt:
+  auth:
+    converter:
+      resource-id: ${CLIENT_ID}
+      principle-attribute: preferred_username
