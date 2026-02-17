@@ -25,10 +25,6 @@ RUN ls -l ./gradlew
 
 ENV GRADLE_OPTS="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
 
-# Copy client-libs and run dependencies task
-COPY client-libs client-libs
-RUN ./gradlew dependencies
-
 # Copy the source code and build the application
 COPY src src
 
