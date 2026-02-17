@@ -22,6 +22,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private static final String[] WHITE_LIST_URL = {
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v1/auth/**",
+            "/actuator/**",
+    };
+
     private final JwtAuthConverter jwtAuthConverter;
 
     @Bean
@@ -30,7 +43,7 @@ public class SecurityConfig {
                 .cors(cors -> {})
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers(WHITE_LIST_URL).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

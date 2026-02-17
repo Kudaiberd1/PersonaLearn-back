@@ -3,15 +3,15 @@ spring:
     name: personalearn
     jwt:
       keycloak:
-        url: ${ISSUER_URI}
-        client-id: ${CLIENT_ID}
-        client-secret: ${CLIENT_SECRET}
+        url: ${ISSUER_URI:https://keycloak.ui-tap.com/realms/persona-learn}
+        client-id: ${CLIENT_ID:persona-learn}
+        client-secret: ${CLIENT_SECRET:7rGBPBWliQCG9DFHwchHNY0Lw74tBJMz}
 
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${ISSUER_URI}
+          issuer-uri: ${ISSUER_URI:https://keycloak.ui-tap.com/realms/persona-learn}
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
   web:
     error:
@@ -26,9 +26,14 @@ server:
 jwt:
   auth:
     converter:
-      resource-id: ${CLIENT_ID}
+      resource-id: ${spring.application.jwt.keycloak.client-id}
       principle-attribute: preferred_username
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
 
 management:
   endpoint:
