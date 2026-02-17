@@ -15,7 +15,7 @@ public class DemoController {
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('client_admin')")
+    @PreAuthorize("hasRole('client_admin')") // todo: create enum for roles or do something else like in "inlive" or "wonder"
     public String admin() {
         return "Hello Admin";
     }

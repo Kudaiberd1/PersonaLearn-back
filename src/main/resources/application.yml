@@ -15,10 +15,30 @@ spring:
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 server:
-  port: 8000
+  port: 8080
 
 jwt:
   auth:
     converter:
       resource-id: ${CLIENT_ID}
       principle-attribute: preferred_username
+
+
+management:
+  endpoint:
+    metrics:
+      access: read_only
+    prometheus:
+      access: read_only
+    health:
+      show-details: always
+    beans:
+      access: read_only
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  prometheus:
+    metrics:
+      export:
+        enabled: true
